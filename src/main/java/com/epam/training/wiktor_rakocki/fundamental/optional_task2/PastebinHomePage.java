@@ -1,4 +1,4 @@
-package com.epam.training.wiktor_rakocki.fundamental.optional_task1;
+package com.epam.training.wiktor_rakocki.fundamental.optional_task2;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +19,8 @@ public class PastebinHomePage {
     private final By expirationDropdown = By.id("select2-postform-expiration-container");
     private final By expiration10Min = By.xpath("//li[contains(text(), '10 Minutes')]");
     private final By submitButton = By.xpath("//button[text()='Create New Paste']");
+    private final By syntaxHighlightDropDown = By.id("select2-postform-format-container");
+    private final By bashSyntaxOption = By.xpath("//li[text()='Bash']");
 
     public PastebinHomePage(WebDriver driver) {
         this.driver = driver;
@@ -36,6 +38,11 @@ public class PastebinHomePage {
     public void setPasteExpiration10Min() {
         driver.findElement(expirationDropdown).click();
         wait.until(ExpectedConditions.elementToBeClickable(expiration10Min)).click();
+    }
+
+    public void setPasteSyntaxToBash() {
+        driver.findElement(syntaxHighlightDropDown).click();
+        wait.until(ExpectedConditions.elementToBeClickable(bashSyntaxOption)).click();
     }
 
     public void submitPaste() {

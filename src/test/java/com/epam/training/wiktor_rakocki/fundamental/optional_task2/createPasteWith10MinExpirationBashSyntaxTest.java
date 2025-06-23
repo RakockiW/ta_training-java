@@ -1,4 +1,4 @@
-package com.epam.training.wiktor_rakocki.fundamental.optional_task1;
+package com.epam.training.wiktor_rakocki.fundamental.optional_task2;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,27 +6,30 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class createPasteWith10MinExpirationTest {
-
+public class createPasteWith10MinExpirationBashSyntaxTest {
     private WebDriver driver;
     private PastebinHomePage homePage;
 
     @BeforeEach
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get("https://pastebin.com/");
+        driver.get("https://pastebin.com");
         homePage = new PastebinHomePage(driver);
         driver.manage().window().maximize();
     }
 
     // Pastebin has a CAPTCHA system so unfortunately I can't assert anything
-
     @Test
-    public void testCreateNewPaste() {
+    public void testCreatePasteWith10MinExpirationBashSyntax() {
         homePage.handleCookiePopupIfPresent();
         homePage.handleBannerIfPresent();
-        homePage.enterTitle("helloweb");
-        homePage.enterCode("Hello from WebDriver");
+        homePage.setPasteSyntaxToBash();
+        homePage.enterTitle("how to gain dominance among developers");
+        homePage.enterCode(
+                "git config --global user.name  \"New Sheriff in Town\"\n" +
+                "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
+                "git push origin master --force\n"
+        );
         homePage.setPasteExpiration10Min();
         homePage.submitPaste();
     }
@@ -37,4 +40,5 @@ public class createPasteWith10MinExpirationTest {
             driver.quit();
         }
     }
+
 }
